@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <% if logged_in? %>
-          <li class="nav-item"><a href="#" class="nav-link">新規プラン作成</a></li>
+          <li class="nav-item"><%= link_to "新規プラン作成", new_plan_path, class: "nav-link" %></li>
           <li class="nav-item"><%= link_to "ログアウト", logout_path, class: "nav-link", method: :delete %></li>
         <% else %>
           <li class="nav-item"><%= link_to "新規登録", signup_path, class: "nav-link" %></li>
