@@ -2,6 +2,7 @@ class PlansController < ApplicationController
   before_action :require_user_logged_in
   def show
     @plan = current_user.plans.find_by(id: params[:id])
+    @schedules = @plan.schedules.where(day: 1)
   end
 
   def new

@@ -1,0 +1,68 @@
+<% if @plan.schedules.any? %>
+  <div class="text-center">
+    <h1><%= @plan.id %>、 <%= @plan.title %>のプラン詳細・スケジュール一覧ページ</h1>
+  </div>
+  <%= render "layouts/day" %>
+  
+  <table class="table table-bordered">
+    <tr>
+      <th>id</th>
+      <td><%= @plan.id %></td>
+    </tr>
+    <tr>
+      <th>タイトル</th>
+      <td><%= @plan.title %></td>
+    </tr>
+  </table>
+  
+  <%= link_to "スケジュール作成", new_plan_schedule_path, class: "btn btn-primary" %>
+  <%= link_to "プラン編集", edit_plan_path(@plan), class: "btn btn-secondary" %>
+  <%= link_to "プラン削除", @plan, method: :delete, data: {confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-danger" %>
+  
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>開始時間</th>
+        <th>カテゴリ</th>
+        <th>予定</th>
+        <th>メモ</th>
+        <th>ボタン</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @schedules.each do |schedule| %>
+        <tr>
+          <td class="text-center"><%= schedule.start_time.strftime("%H:%M") %></td>
+          <td class="text-center"><%= schedule.category %></td>
+          <td class="text-center"><%= schedule.destination %></td>
+          <td class="text-center"><%= schedule.memo %></td>
+          <td><%= link_to "編集", edit_plan_schedule_path(@plan, schedule.id), class: "btn btn-secondary" %><%= link_to "削除", plan_schedule_path(@plan, schedule), method: :delete, data: {confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-danger" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="text-center">
+    <h1><%= @plan.id %>、 <%= @plan.title %>のプラン詳細ページ</h1>
+  </div>
+
+  <table class="table table-bordered">
+    <tr>
+      <th>id</th>
+      <td><%= @plan.id %></td>
+    </tr>
+    <tr>
+      <th>タイトル</th>
+      <td><%= @plan.title %></td>
+    </tr>
+  </table>
+  
+  <div class="text-center">
+    <p>１日目のスケジュールがまだありません。新規スケジュール作成へ</p>
+  </div>
+  
+  <%= link_to "スケジュール作成", new_plan_schedule_path, class: "btn btn-primary" %>
+  <%= link_to "プラン編集", edit_plan_path(@plan), class: "btn btn-light" %>
+  <%= link_to "プラン削除", @plan, method: :delete, data: {confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-danger" %>
+<% end %>
+

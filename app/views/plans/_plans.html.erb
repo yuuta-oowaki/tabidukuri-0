@@ -10,9 +10,9 @@
     </tr>
     <% @plans.each do |plan| %>
       <tr>
-        <td><%= link_to plan.id, plan %></td>
-      <td class="text-center"><%= plan.title %></td>
-    </tr>
+        <td><%= link_to plan.id, plan_schedules_path(plan) %></td>
+        <td class="text-center"><%= plan.title %></td>
+      </tr>
     <% end %>
   </table>
   <div>
